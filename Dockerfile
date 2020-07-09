@@ -12,9 +12,15 @@ ARG BORGMATIC_VERSION=1.5.8
 
 COPY --from=builder /wheels /wheels
 
-RUN apk --no-cache add borgbackup openssh-client bash \
+RUN apk add --no-cache \
+        bash \
+        borgbackup \
+        openssh-client \
     && pip3 install -f /wheels borgmatic==${BORGMATIC_VERSION} \
-    && rm -fr /var/cache/apk/* /wheels /.cache
+    && rm -fr \
+        /.cache \
+        /var/cache/apk/* \
+        /wheels
 
 COPY ./entrypoint.sh /entrypoint.sh
 
