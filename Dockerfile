@@ -1,4 +1,4 @@
-ARG PYTHON_VERSION=3.6-alpine3.7
+ARG PYTHON_VERSION=3.8-alpine3.12
 
 FROM python:${PYTHON_VERSION} as builder
 ARG BORGMATIC_VERSION=1.5.8
@@ -15,6 +15,7 @@ COPY --from=builder /wheels /wheels
 RUN apk add --no-cache \
         bash \
         borgbackup \
+        docker-cli \
         openssh-client \
     && pip3 install -f /wheels borgmatic==${BORGMATIC_VERSION} \
     && rm -fr \

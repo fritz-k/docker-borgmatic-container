@@ -35,6 +35,16 @@ If the first argument does not start with a `-`, then it is called as an executa
 docker run --rm monachus/borgmatic borg --version
 ```
 
+## Docker Commands
+
+You can execute docker commands - e.g. triggering a container's built-in backup solution or
+start/stop a container - from borgmatic hooks if you bind mount the `/var/run/docker.sock` file
+from the host. This can be achieved by adding `-v /var/run/docker.sock:/var/run/docker.sock` to the
+example above.
+
+However, this grants complete docker-daemon access to the container and thus effectively the host
+system. Make sure to consider the security implications when evaluating this use case.
+
 # Issues
 
 Please open an issue describing the problem or requested feature. PRs are welcome.
